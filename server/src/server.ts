@@ -7,8 +7,9 @@ const app = express();
 //initialize a simple http server
 const server = http.createServer(app);
 
+
 //initialize the WebSocket server instance
-const wss = new WebSocket.Server({ server });
+const wss = new WebSocket.Server({ server, path: "/ws" });
 
 interface ExtWebSocket extends WebSocket {
     isAlive: boolean;
@@ -25,6 +26,12 @@ export class Message {
         public sender: string
     ) { }
 }
+
+
+app.get('/', function (req, res) {
+    res.send('<b>My</b> first express http server');
+});
+
 
 wss.on('connection', (ws: WebSocket) => {
 
@@ -80,7 +87,14 @@ setInterval(() => {
     });
 }, 10000);
 
+
+app.listen(process.env.PORT || 3000, function () {
+    console.log('Example app listening on port 3000.');
+});
+
 //start our server
 server.listen(process.env.PORT || 8999, () => {
-    console.log(`Server started on port ${server.address().port} :)`);
+    
+    console.log(`Server started on port 8999 :)`);
 });
+

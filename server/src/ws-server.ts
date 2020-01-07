@@ -3,7 +3,7 @@ import {Message} from './models/message';
 import {app} from './app'
 import {server} from './main'
 
-
+const PORT = 8081;
 
 
 //initialize the WebSocket server instance
@@ -20,12 +20,10 @@ function createMessage(content: string, isBroadcast = false, sender = 'NS'): str
 
 
 
-app.get('/', function (req, res) {
-    res.send('<b>My</b> first express http server');
-});
 
 
 wss.on('connection', (ws: WebSocket) => {
+    
 
     const extWs = ws as ExtWebSocket;
 
@@ -82,9 +80,9 @@ setInterval(() => {
 
 
 
-//start our server
-server.listen(process.env.PORT || 8999, () => {
+// //start our server
+// server.listen(process.env.PORT || PORT, () => {
     
-    console.log(`Server started on port 8999 :)`);
-});
+//     console.log(`Server started on port ${wss.options.port} :)`);
+// });
 

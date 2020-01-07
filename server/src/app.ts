@@ -15,4 +15,13 @@ app.use(requestLoggerMiddleware);
 app.use(bodyParser.json())
 
 
+app.get('/messages', function (req : express.Request, res: express.Response, next: express.NextFunction) {
+    res.send('implement get all messages');
+});
+
+app.get('/message', function (req: express.Request , res: express.Response, next : express.NextFunction) {
+    res.send('implement get message by conversation id ');
+});
+
+
 export {app}

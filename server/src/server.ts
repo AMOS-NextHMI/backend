@@ -1,11 +1,9 @@
-import * as express from 'express';
-import * as http from 'http';
 import * as WebSocket from 'ws';
+import {Message} from './models/message';
+import {app} from './app'
+import {server} from './main'
 
-const app = express();
 
-//initialize a simple http server
-const server = http.createServer(app);
 
 
 //initialize the WebSocket server instance
@@ -19,13 +17,7 @@ function createMessage(content: string, isBroadcast = false, sender = 'NS'): str
     return JSON.stringify(new Message(content, isBroadcast, sender));
 }
 
-export class Message {
-    constructor(
-        public content: string,
-        public isBroadcast = false,
-        public sender: string
-    ) { }
-}
+
 
 
 app.get('/', function (req, res) {
@@ -88,9 +80,7 @@ setInterval(() => {
 }, 10000);
 
 
-app.listen(process.env.PORT || 3000, function () {
-    console.log('Example app listening on port 3000.');
-});
+
 
 //start our server
 server.listen(process.env.PORT || 8999, () => {

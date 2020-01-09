@@ -5,7 +5,7 @@
 
 
 ## endpoints
-websocket  : ws://localhost:8999/ws
+websocket  : ws://localhost:8080/ws
 
 
 get : messages TODO

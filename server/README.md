@@ -3,6 +3,11 @@ A simple implementation of a Websocket server based on node/express written in t
 
 # Running the server in docker
 
+0. Change into the server directory
+   ```bash
+   cd server
+   ```
+
 1. Build the container:
    ```bash
     docker-compose build

@@ -1,5 +1,6 @@
 import * as express from 'express';
 import { MongoHelper } from './mongo.helper';
+import { ObjectId } from 'mongodb'
 
 const messagingRouter = express.Router();
 
@@ -19,11 +20,17 @@ messagingRouter.get('/messages', function (req: express.Request, res: express.Re
         }
 
     });
-    // res.send('implement get all messages');
 });
 
-messagingRouter.get('/message', function (req: express.Request, res: express.Response, next: express.NextFunction) {
-    res.send('implement get message by conversation id ');
+messagingRouter.get('/messages/:messageId', function (req: express.Request, res: express.Response, next: express.NextFunction) {
+    const id = new ObjectId(req.params.messageId);
+    getCollection().findOne({ _id: id }, (error, result) => {
+        if (error || result === null) {
+            res.sendStatus(404);
+        } else {
+            res.json(result);
+        }
+    });
 });
 
 export { messagingRouter };

@@ -1,9 +1,9 @@
 import * as express from 'express';
 import * as WebSocket from 'ws';
-import {Message} from './models/message';
+import { Message } from './models/message';
 import * as cors from 'cors';
 import { requestLoggerMiddleware } from './request.logger.middleware';
-import  * as bodyParser from 'body-parser'
+import * as bodyParser from 'body-parser'
 import { messagingRouter } from './messaging.controller';
 
 
@@ -18,4 +18,4 @@ app.use(bodyParser.json());
 app.use(messagingRouter);
 
 
-export {app}
+export { app }

@@ -13,9 +13,9 @@ conversationRouter.get('/users/:userId/conversations', function (req: express.Re
     res.json(
         {
             "conversations": [
-                { "conversationId": "STRING", "lastmessage": { "senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING" } },
-                { "conversationId": "STRING", "lastmessage": { "senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING" } },
-                { "conversationId": "STRING", "lastmessage": { "senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING" } }
+                { "conversationId": "dummy-1", "lastmessage": { "senderUserName": "Dummy Alice", "timestamp": "2020-01-15T22:05:24Z", "messageText": "Oh echt, ich hab noch garnichts" } },
+                { "conversationId": "dummy-2", "lastmessage": { "senderUserName": "Dummy Carol", "timestamp": "2020-01-17T04:17:17Z", "messageText": "Hey, do you wan't to go out with me?" } },
+                { "conversationId": "dummy-3", "lastmessage": { "senderUserName": "Dummy Eve", "timestamp": "2020-01-15T21:26:17Z", "messageText": "Hasta la vista" } }
             ]
         }
     );
@@ -25,15 +25,18 @@ conversationRouter.get('/conversations/:conversationId', function (req: express.
     // TODO implement db access
     res.json(
         {
-            "conversationId": "STRING",
-            "name": "STRING",
+            "conversationId": "dummy-1",
+            "name": "ChatmitA",
             "member": [
-                { "userId": "STRING", "name": "STRING", "pictureURL": "String" },
-                { "userId": "STRING", "name": "STRING", "pictureURL": "String" }
+                { "userId": "dummy-a", "name": "Dummy Alice", "pictureURL": "" },
+                { "userId": "dummy-b", "name": "Dummy Bob", "pictureURL": "" }
             ],
             "messages": [
-                { "senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING" },
-                { "senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING" },
+                { "senderUserID": "dummy-a", "timestamp": "2020-01-15T21:26:17Z", "messageText": "Hallo Alice, ?" },
+                { "senderUserID": "dummy-b", "timestamp": "2020-01-15T21:40:24Z", "messageText": "Hey, hey" },
+                { "senderUserID": "dummy-a", "timestamp": "2020-01-15T21:55:24Z", "messageText": "Hast du schon was fuer das AMOS gemacht" },
+                { "senderUserID": "dummy-b", "timestamp": "2020-01-15T21:57:24Z", "messageText": "Ja ganz viel" },
+                { "senderUserID": "dummy-a", "timestamp": "2020-01-15T22:05:24Z", "messageText": "Oh echt, ich hab noch garnichts" }
             ]
         }
     );

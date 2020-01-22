@@ -1,0 +1,6 @@
+{ "conversations": [
+    {"conversationId": "STRING", "lastmessage": "STRING"},
+    {"conversationId": "STRING", "lastmessage": "STRING"},
+    {"conversationId": "STRING", "lastmessage": "STRING"}
+  ]
+}

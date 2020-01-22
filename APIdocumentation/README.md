@@ -2,18 +2,42 @@
 
 ### ConversationsOverview
 
-#### JSON Payload
+#### Request
+```
+RequestTyp: GET
+RequestURL: http://130.149.172.169/conversationsoverview?userid=STRING
+Response: 200 - OK -> JSON
+Error:
+- 400 - Bad Request
+- 401 - Unauthorized
+- 404 - Not Found
+- 500 - ServerError
+```
 
+#### JSON Payload
 ```json
 { "conversations": [
-    {"conversationId": "STRING", "lastmessage": "STRING"},
-    {"conversationId": "STRING", "lastmessage": "STRING"},
-    {"conversationId": "STRING", "lastmessage": "STRING"}
+    {"conversationId": "STRING", "lastmessage": {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"}},
+    {"conversationId": "STRING", "lastmessage": {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"}},
+    {"conversationId": "STRING", "lastmessage": {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"}}
   ]
 }
 ```
 
 ### Conversation
+
+#### Request
+
+```
+RequestTyp: GET
+RequestURL: http://130.149.172.169/conversation?conversationId=STRING
+Response: 200 - OK -> JSON
+Error:
+- 400 - Bad Request
+- 401 - Unauthorized
+- 404 - Not Found
+- 500 - ServerError
+```
 
 #### JSON Payload
 ```json
@@ -34,6 +58,18 @@
 
 ### NewConversation
 
+#### Request
+```
+RequestTyp: POST
+RequestURL: http://130.149.172.169/newconversation?conversationId=STRING
+Response: 201 - Created & conversationID
+Error:
+- 400 - Bad Request
+- 401 - Unauthorized
+- 406 - Not Acceptable
+- 500 - ServerError
+```
+
 #### JSON Payload
 ```json
 { "members": [
@@ -43,6 +79,18 @@
 ```
 
 ### NewMessage
+
+#### Request
+```
+RequestTyp: POST
+RequestURL: 
+Response: 201 - Created 
+Error:
+- 400 - Bad Request
+- 401 - Unauthorized
+- 406 - Not Acceptable
+- 500 - ServerError
+```
 
 #### JSON Payload
 

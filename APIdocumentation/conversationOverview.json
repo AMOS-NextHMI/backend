@@ -1,6 +1,6 @@
 { "conversations": [
-    {"conversationId": "STRING", "lastmessage": "STRING"},
-    {"conversationId": "STRING", "lastmessage": "STRING"},
-    {"conversationId": "STRING", "lastmessage": "STRING"}
+    {"conversationId": "STRING", "lastmessage": {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"}},
+    {"conversationId": "STRING", "lastmessage": {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"}},
+    {"conversationId": "STRING", "lastmessage": {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"}}
   ]
 }

@@ -4,20 +4,20 @@ import { MongoHelper } from "./mongo.helper";
 
 
 const PORT = 8080;
-const MONGO_DB_URL :string = 'mongodb://localhost:27017';
+const MONGO_DB_URL: string = 'mongodb://mongo:27017/server';
 
 //initialize a simple http server
 const server = http.createServer(app);
 
-server.listen(process.env.PORT || PORT,  async () => {
-    console.log('Example app listening on port}.');
+server.listen(process.env.PORT || PORT, async () => {
+    console.log(`Example app listening on port ${PORT}.`);
     try {
         await MongoHelper.connect(MONGO_DB_URL);
-    } catch (error ) {
+    } catch (error) {
         console.error(error);
     }
 });
 
 
 
-export {server}
+export { server }

@@ -4,6 +4,7 @@
         "module": "commonjs",
         "outDir": "./dist/server",
         "strict": true,
+        "allowJs": true,
         "sourceMap": true,
         "typeRoots": [
             "node_modules/@types"
@@ -13,10 +14,8 @@
         "dist",
         "node_modules",
         ".vscode"
-    ], 
+    ],
     "include": [
         "src/**/*.ts"
     ],
-        
-    
 }

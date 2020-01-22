@@ -5,6 +5,7 @@ import * as cors from 'cors';
 import { requestLoggerMiddleware } from './request.logger.middleware';
 import * as bodyParser from 'body-parser'
 import { messagingRouter } from './messaging.controller';
+import { conversationRouter } from './conversation.controller';
 
 
 let app :any 
@@ -16,6 +17,6 @@ app.use(cors());
 app.use(requestLoggerMiddleware);
 app.use(bodyParser.json());
 app.use(messagingRouter);
-
+app.use(conversationRouter);
 
 export { app }

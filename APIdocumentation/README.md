@@ -5,7 +5,7 @@
 #### Request
 ```
 RequestTyp: GET
-RequestURL: http://130.149.172.169/conversationsoverview?userid=STRING
+RequestURL: http://130.149.172.169/users/userId=STRING/conversations
 Response: 200 - OK -> JSON
 Error:
 - 400 - Bad Request
@@ -30,7 +30,7 @@ Error:
 
 ```
 RequestTyp: GET
-RequestURL: http://130.149.172.169/conversation?conversationId=STRING
+RequestURL: http://130.149.172.169/conversations/conversationId=STRING
 Response: 200 - OK -> JSON
 Error:
 - 400 - Bad Request
@@ -61,7 +61,7 @@ Error:
 #### Request
 ```
 RequestTyp: POST
-RequestURL: http://130.149.172.169/newconversation?conversationId=STRING
+RequestURL: http://130.149.172.169/conversations/conversationId=STRING
 Response: 201 - Created & conversationID
 Error:
 - 400 - Bad Request

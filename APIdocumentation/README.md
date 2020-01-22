@@ -83,7 +83,7 @@ Error:
 #### Request
 ```
 RequestTyp: POST
-RequestURL: 
+RequestURL: http://130.149.172.169/conversations/conversationId=STRING/messages
 Response: 201 - Created 
 Error:
 - 400 - Bad Request

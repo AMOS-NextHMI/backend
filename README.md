@@ -1,6 +1,8 @@
 ## install dependencies 
+install mongoDB !!!
 ```cd server & npm install ```
 ## how to compile typescript code 
+```sudo mongod```
 ```cd server & npm run start:watch```
 
 

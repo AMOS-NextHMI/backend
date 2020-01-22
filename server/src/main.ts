@@ -1,4 +1,4 @@
-import { app } from "./app";
+import {app} from './app';
 import * as http from 'http';
 import { MongoHelper } from "./mongo.helper";
 
@@ -7,7 +7,7 @@ const PORT = 8080;
 const MONGO_DB_URL :string = 'mongodb://localhost:27017';
 
 //initialize a simple http server
-const server = http.createServer(app);
+var server = http.createServer(app);
 
 server.listen(process.env.PORT || PORT,  async () => {
     console.log('Example app listening on port}.');

@@ -11,7 +11,6 @@
     "preserve": "npm run build",
     "s": "npm run serve",
     "serve": "concurrently \"npm run build.w\" \"nodemon --watch ./dist/server ./dist/server/server.js\"",
-    "lint": "tslint \"src/**/*.ts\"",
     "prebuild": "npm install",
     "b": "npm run build.w",
     "build": "tsc",
@@ -20,8 +19,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/mongoose": "^5.5.41",
     "express": "^4.16.2",
+    "ts-mongoose": "0.0.21",
     "ts-node": "^8.5.4",
+    "tslint": "^6.0.0",
     "ws": "^4.0.0"
   },
   "devDependencies": {
@@ -35,16 +38,15 @@
   },
   "nodemonConfig": {
     "ignore": [
-    "**/*.test.ts",
-    "**/*.spec.ts",
-    ".git",
-    "node_modules"
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
     ],
     "watch": [
-    "src"
+      "src"
     ],
     "exec": "npm start",
     "ext": "ts"
-    }
-    
+  }
 }

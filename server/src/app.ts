@@ -7,7 +7,8 @@ import  * as bodyParser from 'body-parser'
 import { messagingRouter } from './messaging.controller';
 
 
-const app = express();
+let app :any 
+app = express();
 
 
 // add middleware here 

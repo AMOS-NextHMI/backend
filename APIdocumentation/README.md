@@ -48,7 +48,7 @@ Error:
       {"userId": "STRING", "name": "STRING", "pictureURL": "String"}
   ],
   "messages": [
-      {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"}
+      {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"},
       {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"},
   ]
 }

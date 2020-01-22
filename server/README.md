@@ -20,18 +20,3 @@ The server can be stopped with the command:
 ```bash
    docker-compose down
 ```
-
-# Running the projekt for development in docker and file watch
-
-1. Build the container:
-   ```bash
-    docker-compose -f docker-compose-development.yml build
-   ```
-2. Rund the image:
-   ```bash
-    docker-compose -f docker-compose-development.yml up
-   ```
-The server can be stopped with the command:
-```bash
-   docker-compose -f docker-compose-development.yml down
-```

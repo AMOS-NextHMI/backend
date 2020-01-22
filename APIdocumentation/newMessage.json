@@ -1,3 +1,3 @@
-{ "conversationId": "STRING",
-  "messageText": "STRING"
+{ "conversationId": "dummy-1",
+  "messageText": "Hallo dies ist eine neue Nachricht"
 }

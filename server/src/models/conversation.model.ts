@@ -9,7 +9,7 @@ const conversationSchema = new mongoose.Schema({
     
 });
 
-const conversationModel = mongoose.model<Converstation & mongoose.Document>('Conversation', conversationSchema);
+const ConversationModel = mongoose.model<Converstation & mongoose.Document>('Conversation', conversationSchema);
 
-export default conversationModel;
+export default ConversationModel;
 

@@ -10,6 +10,6 @@ const messageSchema = new mongoose.Schema({
     sender: String, 
 });
 
-const messageModel = mongoose.model<Message & mongoose.Document>('Message', messageSchema);
+const MessageModel = mongoose.model<Message & mongoose.Document>('Message', messageSchema);
 
-export default messageModel;
+export default MessageModel;

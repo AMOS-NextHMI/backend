@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { MongoHelper } from './mongo.helper';
 import { ObjectId } from 'mongodb';
+import conversationModel from './models/conversation.model';
 
 const conversationRouter = express.Router();
 
@@ -48,6 +49,8 @@ conversationRouter.get('/conversations/:conversationId', function (req: express.
 // ### NewConversation
 conversationRouter.post('/conversations/:conversationId', function (req: express.Request, res: express.Response, next: express.NextFunction) {
     const members = req.body['members'];
+    const conversation = new conversationModel
+
     
     
     // TODO implement db access

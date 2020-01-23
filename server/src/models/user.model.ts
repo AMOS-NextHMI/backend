@@ -4,7 +4,7 @@ import User from './user.interface';
 const userSchema = new mongoose.Schema({
     name: String,
     email: String,
-    password: String, 
+    pwHash: String, 
 });
 
 const UserModel = mongoose.model<User & mongoose.Document>('User', userSchema);

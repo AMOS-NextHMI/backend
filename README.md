@@ -18,9 +18,12 @@ Or
    cd server
    ```
 
-1. Build the container:
+1. Build the container, and install npm dependencies:
    ```bash
     docker-compose build
+    cd src
+    npm i
+    cd ..
    ```
 2. Run the image:
    ```bash

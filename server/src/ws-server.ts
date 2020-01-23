@@ -1,5 +1,5 @@
 import * as WebSocket from 'ws';
-import { Message } from './models/message';
+import { Message } from './models/message.interface';
 import { server } from './main'
 import { MongoHelper } from './mongo.helper';
 

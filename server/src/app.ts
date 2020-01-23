@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as WebSocket from 'ws';
-import { Message } from './models/message';
+import { Message } from './models/message.interface';
 import * as cors from 'cors';
 import { requestLoggerMiddleware } from './request.logger.middleware';
 import * as bodyParser from 'body-parser'

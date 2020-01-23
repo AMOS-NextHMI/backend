@@ -1,7 +1,10 @@
 import * as express from 'express';
 import { MongoHelper } from './mongo.helper';
 import { ObjectId } from 'mongodb';
-import conversationModel from './models/conversation.model';
+import ConversationModel from './models/conversation.model';
+
+
+
 
 const conversationRouter = express.Router();
 
@@ -46,19 +49,30 @@ conversationRouter.get('/conversations/:conversationId', function (req: express.
 });
 
 
-// ### NewConversation
-conversationRouter.post('/conversations/:conversationId', function (req: express.Request, res: express.Response, next: express.NextFunction) {
+// ### POST NewConversation --> conversation_id on 201
+conversationRouter.post('/conversation', (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const members = req.body['members'];
-    const conversation = new conversationModel
-
-    
-    
-    // TODO implement db access
-    res.status(201).json(
+    const collection = getCollection();
+    const conversation = new ConversationModel(
         {
-            "conversationId": "507f1f77bcf86cd799439011"
+            name: req.body.name,
+            member: req.body.members,
+            messages: []
+        })
+    collection.insertOne(conversation, (err, conv) => {
+        if (err) {
+            res.status(500).json({
+                "error": err
+            });
+            return;
         }
-    );
+        res.status(201).json(
+            {
+                "conversationId": conversation.id
+            }
+        );
+        res.send()
+    });
 });
 
 

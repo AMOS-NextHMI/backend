@@ -2,7 +2,6 @@ import * as mongoose from 'mongoose';
 import { Converstation } from './conversation.interface';
 
 const conversationSchema = new mongoose.Schema({
-    converstationId: String,
     name : String,
     members : Array, // list of user ids 
     messages : Array, // list of messages 

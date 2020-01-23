@@ -55,8 +55,6 @@ authorisationRouter.post('/reset', function (req: express.Request, res: express.
 });
 
 authorisationRouter.post('/login', function (req: express.Request, res: express.Response, next: express.NextFunction) {
-
-
 	
 
 	

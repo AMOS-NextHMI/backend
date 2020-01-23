@@ -1,6 +1,5 @@
 export class Converstation {
     constructor(
-        public converstationId: string,
         public name : string,
         public members : Array<string>, // list of user ids 
         public messages : Array<string>, // list of messages 

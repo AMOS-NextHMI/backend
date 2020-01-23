@@ -1,0 +1,6 @@
+{ "conversations": [
+    {"conversationId": "dummy-1", "lastmessage": {"senderUserName": "Dummy Alice", "timestamp": "2020-01-15T22:05:24Z", "messageText": "Oh echt, ich hab noch garnichts"}},
+    {"conversationId": "dummy-2", "lastmessage": {"senderUserName": "Dummy Carol", "timestamp": "2020-01-17T04:17:17Z", "messageText": "Hey, do you wan't to go out with me?"}},
+    {"conversationId": "dummy-3", "lastmessage": {"senderUserName": "Dummy Eve", "timestamp": "2020-01-15T21:26:17Z", "messageText": "Hasta la vista"}}
+  ]
+}

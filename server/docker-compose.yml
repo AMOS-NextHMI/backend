@@ -5,12 +5,16 @@ services:
     restart: always
     build: .
     ports:
-      - "8080:8080"
+      - "80:80"
       - "8081:8081"
     links:
       - mongo
+    volumes: 
+      - .:/app
   mongo:
     container_name: mongo
     image: mvertes/alpine-mongo
     ports:
       - "27017:27017"
+    expose: 
+      - 27017

@@ -1,10 +1,11 @@
 import * as WebSocket from 'ws';
-import {Message} from './models/message';
-import {app} from './app'
-import {server} from './main'
+import { Message } from './models/message.interface';
+import { server } from './main'
+import { MongoHelper } from './mongo.helper';
 
-const PORT = 8081;
-
+const getCollection = () => {
+    return MongoHelper.client.db('messaging').collection('messages');
+}
 
 //initialize the WebSocket server instance
 const wss = new WebSocket.Server({ server, path: "/ws" });
@@ -17,13 +18,8 @@ function createMessage(content: string, isBroadcast = false, sender = 'NS'): str
     return JSON.stringify(new Message(content, isBroadcast, sender));
 }
 
-
-
-
-
-
 wss.on('connection', (ws: WebSocket) => {
-    
+
 
     const extWs = ws as ExtWebSocket;
 
@@ -36,24 +32,26 @@ wss.on('connection', (ws: WebSocket) => {
     //connection is up, let's add a simple simple event
     ws.on('message', (msg: string) => {
 
+        if (msg === null || msg === undefined || msg == '') {
+            ws.send('{ "error": "no message send" }');
+            return;
+        }
+
         const message = JSON.parse(msg) as Message;
 
-        setTimeout(() => {
-            if (message.isBroadcast) {
+        const collection = getCollection();
+        const test = collection.insertOne(message);
 
-                //send back the message to the other clients
-                wss.clients
-                    .forEach(client => {
-                        if (client != ws) {
-                            client.send(createMessage(message.content, true, message.sender));
-                        }
-                    });
-
-            }
-
-            ws.send(createMessage(`You sent -> ${message.content}`, message.isBroadcast));
-
-        }, 1000);
+        if (message.isBroadcast) {
+            //send back the message to the other clients
+            wss.clients
+                .forEach(client => {
+                    if (client != ws) {
+                        client.send(createMessage(message.content, true, message.sender));
+                    }
+                });
+        }
+        ws.send(createMessage(`You sent -> ${test}`));
 
     });
 
@@ -63,6 +61,7 @@ wss.on('connection', (ws: WebSocket) => {
     ws.on('error', (err) => {
         console.warn(`Client disconnected - reason: ${err}`);
     })
+
 });
 
 setInterval(() => {
@@ -76,13 +75,3 @@ setInterval(() => {
         ws.ping(null, undefined);
     });
 }, 10000);
-
-
-
-
-// //start our server
-// server.listen(process.env.PORT || PORT, () => {
-    
-//     console.log(`Server started on port ${wss.options.port} :)`);
-// });
-

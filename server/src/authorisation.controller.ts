@@ -50,7 +50,6 @@ authorisationRouter.post('/register', function (req: express.Request, res: expre
 });
 
 authorisationRouter.post('/reset', function (req: express.Request, res: express.Response, next: express.NextFunction) {
-
 	MongoHelper.client.db('messaging').collection('users').deleteMany({});
 	res.send(200);
 });

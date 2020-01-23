@@ -9,6 +9,8 @@ const getCollection = () => {
 }
 
 conversationRouter.get('/users/:userId/conversations', function (req: express.Request, res: express.Response, next: express.NextFunction) {
+
+
     // TODO implement db access
     res.json(
         {
@@ -42,7 +44,12 @@ conversationRouter.get('/conversations/:conversationId', function (req: express.
     );
 });
 
+
+// ### NewConversation
 conversationRouter.post('/conversations/:conversationId', function (req: express.Request, res: express.Response, next: express.NextFunction) {
+    const members = req.body['members'];
+    
+    
     // TODO implement db access
     res.status(201).json(
         {

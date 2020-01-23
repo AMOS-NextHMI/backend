@@ -5,3 +5,4 @@ export class Message {
         public sender: string
     ) { }
 }
+

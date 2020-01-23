@@ -25,8 +25,9 @@ conversationRouter.get('/users/:userId/conversations', function (req: express.Re
     );
 });
 
+
+// ### GET conversation by id --> conversation object on success
 conversationRouter.get('/conversations/:conversationId', function (req: express.Request, res: express.Response, next: express.NextFunction) {
-    // TODO implement db access
     const collection = getCollection();
     collection.findOne({
         _id: new ObjectId(req.params.conversationId),

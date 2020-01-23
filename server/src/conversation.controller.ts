@@ -2,9 +2,7 @@ import * as express from 'express';
 import { MongoHelper } from './mongo.helper';
 import { ObjectId, ObjectID } from 'mongodb';
 import ConversationModel from './models/conversation.model';
-
-
-
+import MessageModel from './models/message.model';
 
 const conversationRouter = express.Router();
 
@@ -70,10 +68,23 @@ conversationRouter.post('/conversation', (req: express.Request, res: express.Res
 
 
 conversationRouter.post('/conversations/:conversationId/messages', (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    // TODO implement db access
-    res.status(201).json(
-        {}
-    );
+    const { messageText, authUserId, conversationId } = req.params;
+    const collection = getCollection();
+    const message = new MessageModel({
+        messageText: messageText,
+        authUserId: authUserId,
+        conversationId: conversationId
+    });
+    collection.insertOne(message, (err, message) => {
+        if (err) {
+            res.status(500).json({
+                "error": err
+            });
+            return;
+        }
+
+        res.status(201).end();
+    });
 });
 
 export { conversationRouter };

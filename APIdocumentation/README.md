@@ -95,7 +95,7 @@ Error:
 #### JSON Payload
 
 ```json
-{ "conversationId": "STRING",
+{
   "messageText": "STRING"
 }
 ```

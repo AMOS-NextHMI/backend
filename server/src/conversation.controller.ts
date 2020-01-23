@@ -1,15 +1,7 @@
 import * as express from 'express';
 import { MongoHelper } from './mongo.helper';
-<<<<<<< HEAD
-import { ObjectId } from 'mongodb';
 import ConversationModel from './models/conversation.model';
-
-
-
-=======
-import conversationModel from './models/conversation.model';
-import messageModel from './models/message.model';
->>>>>>> Modify message model and conversation route to reflect api proposal
+import MessageModel from './models/message.model';
 
 const conversationRouter = express.Router();
 
@@ -57,17 +49,8 @@ conversationRouter.get('/conversations/:conversationId', function (req: express.
 // ### POST NewConversation --> conversation_id on 201
 conversationRouter.post('/conversation', (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const members = req.body['members'];
-<<<<<<< HEAD
     const collection = getCollection();
     const conversation = new ConversationModel(
-=======
-    const conversation = new conversationModel
-
-
-
-    // TODO implement db access
-    res.status(201).json(
->>>>>>> Modify message model and conversation route to reflect api proposal
         {
             name: req.body.name,
             member: req.body.members,
@@ -93,7 +76,7 @@ conversationRouter.post('/conversation', (req: express.Request, res: express.Res
 conversationRouter.post('/conversations/:conversationId/messages', (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const { messageText, authUserId, conversationId } = req.params;
     const collection = getCollection();
-    const message = new messageModel({
+    const message = new MessageModel({
         messageText: messageText,
         authUserId: authUserId,
         conversationId: conversationId

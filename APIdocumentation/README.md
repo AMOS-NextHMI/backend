@@ -61,7 +61,7 @@ Error:
 #### Request
 ```
 RequestTyp: POST
-RequestURL: http://130.149.172.169/conversations/conversationId=STRING
+RequestURL: http://130.149.172.169/conversation
 Response: 201 - Created & conversationID
 Error:
 - 400 - Bad Request

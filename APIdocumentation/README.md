@@ -123,6 +123,8 @@ Error:
 
 #### JSON Payload Response
 
+The Server will return a JWT with the following payload:
+
 ```json
 {
   "id": "STRING",

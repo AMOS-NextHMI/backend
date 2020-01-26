@@ -106,19 +106,28 @@ Error:
 ```
 RequestTyp: POST
 RequestURL: http://130.149.172.169/login
-Response: 200 - OK
+Response: 200 - Token -> JSON
 Error:
-- 400 - { "error": "Incorrect password!" }
-- 400 - { "error": "Username doesn't exist!" }
+- 401 - { "error": "STRING" }
+- 422 - Unprocessable Entity
 ```
 
-#### JSON Payload
+#### JSON Payload Post
 
 ```json
 {
   "username": "STRING",
-  "email": "STRING",
   "password": "STRING"
+}
+```
+
+#### JSON Payload Response
+
+```json
+{
+  "id": "STRING",
+  "exp": "Date",
+  "username": "STRING"
 }
 ```
 
@@ -128,10 +137,10 @@ Error:
 ```
 RequestTyp: POST
 RequestURL: http://130.149.172.169/register
-Response: 200 - OK
+Response: 201 - Created
 Error:
-- 400 - { "error": "User with this name/email already exists!" }
-- 500 - <html>Error: Invalid password<html>
+- 401 - { "error": STRING }
+- 422 - Unprocessable Entity
 ```
 
 #### JSON Payload

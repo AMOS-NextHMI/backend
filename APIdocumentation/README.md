@@ -1,4 +1,4 @@
-## Server->Phone (GET Requests)
+## Server -> Phone (GET Requests)
 
 ### ConversationsOverview
 
@@ -100,17 +100,62 @@ Error:
 }
 ```
 
+### Login
 
-Server->Phone (GET)
+#### Request
+```
+RequestTyp: POST
+RequestURL: http://130.149.172.169/login
+Response: 200 - OK
+Error:
+- 400 - { "error": "Incorrect password!" }
+- 400 - { "error": "Username doesn't exist!" }
+```
 
-Conversation (id, name, participant (id, name, pictureurl), message (Sender, Text, Timestamp))
+#### JSON Payload
+
+```json
+{
+  "username": "STRING",
+  "email": "STRING",
+  "password": "STRING"
+}
+```
+
+### Register
+
+#### Request
+```
+RequestTyp: POST
+RequestURL: http://130.149.172.169/register
+Response: 200 - OK
+Error:
+- 400 - { "error": "User with this name/email already exists!" }
+- 500 - <html>Error: Invalid password<html>
+```
+
+#### JSON Payload
+
+```json
+{
+  "username": "STRING",
+  "email": "STRING",
+  "password": "STRING"
+}
+```
+
+## Server -> Phone (GET)
+
+Conversation(id, name, participant (id, name, pictureurl), message (Sender, Text, Timestamp))
 ConversationOverview(conversationIDs, lastMessages)
 /getConversation ConId
 /getconversationOverview UserId
 
 
-Phone-> Server
+## Phone -> Server (POST)
+
 newMessage(ConversationID, Text)
-newConversation(participantsID,)
+newConversation(participantsID)
+login(username, email, password)
 /postNewMessage
 /postNewConversation

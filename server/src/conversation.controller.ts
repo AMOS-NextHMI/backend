@@ -2,14 +2,11 @@ import * as express from 'express';
 import { MongoHelper } from './mongo.helper';
 import { ObjectId } from 'mongodb';
 import ConversationModel from './models/conversation.model';
-import MessageModel from './models/message.model';
+import Message from './models/message.model';
 import { auth } from './middleware/auth';
+import Conversation from './models/conversation.interface';
 
 const conversationRouter = express.Router();
-
-const getCollection = () => {
-    return MongoHelper.client.db('messaging').collection('conversations');
-}
 
 conversationRouter.get('/users/:userId/conversations', auth, function (req: express.Request, res: express.Response, next: express.NextFunction) {
 
@@ -29,11 +26,11 @@ conversationRouter.get('/users/:userId/conversations', auth, function (req: expr
 
 // ### GET conversation by id --> conversation object on success
 conversationRouter.get('/conversations/:conversationId', auth, function (req: express.Request, res: express.Response, next: express.NextFunction) {
-    const collection = getCollection();
-    collection.findOne({
+    const userId = req.user?.id;
+    ConversationModel.findOne({
         _id: new ObjectId(req.params.conversationId),
+        members: userId
     }).then((conv) => {
-        console.log(conv);
         res.status(200).json(conv);
 
     }).catch((error) => {
@@ -44,15 +41,17 @@ conversationRouter.get('/conversations/:conversationId', auth, function (req: ex
 
 
 // ### POST NewConversation --> conversation_id on 201
-conversationRouter.post('/conversation', auth, (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    const collection = getCollection();
+conversationRouter.post('/conversations', auth, (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    const { name, members } = req.body;
     const conversation = new ConversationModel(
         {
-            name: req.body.name,
-            member: req.body.members,
+            name: name,
+            member: members,
             messages: []
-        })
-    collection.insertOne(conversation, (err, conv) => {
+        }
+    );
+    conversation.members.push(req.user?.id);
+    conversation.save(err => {
         if (err) {
             res.status(500).json({
                 "error": err
@@ -70,21 +69,19 @@ conversationRouter.post('/conversation', auth, (req: express.Request, res: expre
 
 
 conversationRouter.post('/conversations/:conversationId/messages', auth, (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    const { messageText, authUserId, conversationId } = req.params;
-    const collection = getCollection();
-    const message = new MessageModel({
-        messageText: messageText,
-        authUserId: authUserId,
-        conversationId: conversationId
-    });
-    collection.insertOne(message, (err, message) => {
-        if (err) {
-            res.status(500).json({
-                "error": err
-            });
-            return;
+    const conversationId = req.params.conversationId;
+    const messageText = req.body.messageText;
+    const message = new Message(
+        messageText,
+        req.user?.id,
+        conversationId
+    );
+    ConversationModel.findById(conversationId, (err, conversation: Conversation) => {
+        if (err || !conversation) {
+            res.status(404).end();
         }
-
+        conversation.messages.push(message);
+        conversation.save();
         res.status(201).end();
     });
 });

@@ -1,15 +1,16 @@
-
-
-
-import * as mongoose from 'mongoose';
-import { Message } from './message.interface';
-
-const messageSchema = new mongoose.Schema({
-    messageText: String,
-    userId: String,
-    conversationId: String
-});
-
-const MessageModel = mongoose.model<Message & mongoose.Document>('Message', messageSchema);
-
-export default MessageModel;
+export default class Message {
+    public messageText: string;
+    public userId: string;
+    public conversationId: string;
+    public createdAt: Date;
+    constructor(
+        messageText: string,
+        userId: string,
+        conversationId: string,
+    ) {
+        this.messageText = messageText;
+        this.userId = userId;
+        this.conversationId = conversationId;
+        this.createdAt = new Date();
+    }
+}

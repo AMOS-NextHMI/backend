@@ -1,11 +1,16 @@
-export class Converstation {
-    constructor(
-        public name : string,
-        public members : Array<string>, // list of user ids 
-        public messages : Array<string>, // list of messages 
-    ){}
+import * as mongoose from 'mongoose';
+import Message from './message.model';
+
+export default interface Conversation extends mongoose.Document {
+    name: string;
+    members: Array<string>; // list of user ids 
+    messages: Array<Message>; // list of messages 
+}
+
+export interface ConversationModelInterface extends mongoose.Model<Conversation> {
 
 }
+
 // { "conversationId": "dummy-1",
 // "name": "ChatmitA",
 // "member": [

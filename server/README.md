@@ -8,9 +8,12 @@ A simple implementation of a Websocket server based on node/express written in t
    cd server
    ```
 
-1. Build the container:
+1. Build the container, and install npm dependencies:
    ```bash
     docker-compose build
+    cd src
+    npm i
+    cd ..
    ```
 2. Run the image:
    ```bash
@@ -20,3 +23,5 @@ The server can be stopped with the command:
 ```bash
    docker-compose down
 ```
+
+**If new npm dependencies are installed you have to rerun "npm i"**

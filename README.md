@@ -34,6 +34,8 @@ The server can be stopped with the command:
    docker-compose down
 ```
 
+**If new npm dependencies are installed you have to rerun "npm i"**
+
 # endpoints
 websocket  : ws://localhost:8080/ws
 

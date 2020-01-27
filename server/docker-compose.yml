@@ -11,6 +11,8 @@ services:
       - mongo
     volumes: 
       - .:/app
+      - /app/node_modules
+    command: npm run start:watch
   mongo:
     container_name: mongo
     image: mvertes/alpine-mongo

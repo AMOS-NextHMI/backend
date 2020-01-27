@@ -3,6 +3,7 @@
 Authorization happens with JsonWebTokens.
 The tokens kan be requested over the /login route and will return the JWT String.
 To include the token in your requests add this Header:
+
 Authorization: Bearer YOUR_TOKEN_HERE
 
 ## Server -> Phone (GET Requests)

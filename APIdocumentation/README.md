@@ -1,4 +1,4 @@
-## Server->Phone (GET Requests)
+## Server -> Phone (GET Requests)
 
 ### ConversationsOverview
 
@@ -100,17 +100,73 @@ Error:
 }
 ```
 
+### Login
 
-Server->Phone (GET)
+#### Request
+```
+RequestTyp: POST
+RequestURL: http://130.149.172.169/login
+Response: 200 - Token -> JSON
+Error:
+- 401 - { "error": "STRING" }
+- 422 - Unprocessable Entity
+```
 
-Conversation (id, name, participant (id, name, pictureurl), message (Sender, Text, Timestamp))
+#### JSON Payload Post
+
+```json
+{
+  "username": "STRING",
+  "password": "STRING"
+}
+```
+
+#### JSON Payload Response
+
+The Server will return a JWT with the following payload:
+
+```json
+{
+  "id": "STRING",
+  "exp": "Date",
+  "username": "STRING"
+}
+```
+
+### Register
+
+#### Request
+```
+RequestTyp: POST
+RequestURL: http://130.149.172.169/register
+Response: 201 - Created
+Error:
+- 401 - { "error": STRING }
+- 422 - Unprocessable Entity
+```
+
+#### JSON Payload
+
+```json
+{
+  "username": "STRING",
+  "email": "STRING",
+  "password": "STRING"
+}
+```
+
+## Server -> Phone (GET)
+
+Conversation(id, name, participant (id, name, pictureurl), message (Sender, Text, Timestamp))
 ConversationOverview(conversationIDs, lastMessages)
 /getConversation ConId
 /getconversationOverview UserId
 
 
-Phone-> Server
+## Phone -> Server (POST)
+
 newMessage(ConversationID, Text)
-newConversation(participantsID,)
+newConversation(participantsID)
+login(username, email, password)
 /postNewMessage
 /postNewConversation

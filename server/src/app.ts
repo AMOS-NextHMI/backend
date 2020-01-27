@@ -1,6 +1,4 @@
 import * as express from 'express';
-import * as WebSocket from 'ws';
-import { Message } from './models/message.interface';
 import * as cors from 'cors';
 import { requestLoggerMiddleware } from './request.logger.middleware';
 import * as bodyParser from 'body-parser'
@@ -9,9 +7,8 @@ import { conversationRouter } from './conversation.controller';
 import { authorisationRouter } from './authorisation.controller';
 
 
-let app :any 
+let app: any
 app = express();
-
 
 // add middleware here 
 app.use(cors());

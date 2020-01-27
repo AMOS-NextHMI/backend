@@ -1,8 +1,9 @@
 import * as express from 'express';
 import { MongoHelper } from './mongo.helper';
-import { ObjectId, ObjectID } from 'mongodb';
+import { ObjectId } from 'mongodb';
 import ConversationModel from './models/conversation.model';
 import MessageModel from './models/message.model';
+import { auth } from './middleware/auth';
 
 const conversationRouter = express.Router();
 
@@ -10,7 +11,7 @@ const getCollection = () => {
     return MongoHelper.client.db('messaging').collection('conversations');
 }
 
-conversationRouter.get('/users/:userId/conversations', function (req: express.Request, res: express.Response, next: express.NextFunction) {
+conversationRouter.get('/users/:userId/conversations', auth, function (req: express.Request, res: express.Response, next: express.NextFunction) {
 
 
     // TODO implement db access
@@ -27,7 +28,7 @@ conversationRouter.get('/users/:userId/conversations', function (req: express.Re
 
 
 // ### GET conversation by id --> conversation object on success
-conversationRouter.get('/conversations/:conversationId', function (req: express.Request, res: express.Response, next: express.NextFunction) {
+conversationRouter.get('/conversations/:conversationId', auth, function (req: express.Request, res: express.Response, next: express.NextFunction) {
     const collection = getCollection();
     collection.findOne({
         _id: new ObjectId(req.params.conversationId),
@@ -43,7 +44,7 @@ conversationRouter.get('/conversations/:conversationId', function (req: express.
 
 
 // ### POST NewConversation --> conversation_id on 201
-conversationRouter.post('/conversation', (req: express.Request, res: express.Response, next: express.NextFunction) => {
+conversationRouter.post('/conversation', auth, (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const collection = getCollection();
     const conversation = new ConversationModel(
         {
@@ -68,7 +69,7 @@ conversationRouter.post('/conversation', (req: express.Request, res: express.Res
 });
 
 
-conversationRouter.post('/conversations/:conversationId/messages', (req: express.Request, res: express.Response, next: express.NextFunction) => {
+conversationRouter.post('/conversations/:conversationId/messages', auth, (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const { messageText, authUserId, conversationId } = req.params;
     const collection = getCollection();
     const message = new MessageModel({

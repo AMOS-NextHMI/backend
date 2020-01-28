@@ -1,16 +1,28 @@
-export default class Message {
-    public messageText: string;
-    public userId: string;
-    public conversationId: string;
-    public createdAt: Date;
-    constructor(
-        messageText: string,
-        userId: string,
-        conversationId: string,
-    ) {
-        this.messageText = messageText;
-        this.userId = userId;
-        this.conversationId = conversationId;
-        this.createdAt = new Date();
+import * as mongoose from 'mongoose';
+
+const messageSchema = new mongoose.Schema({
+    messageText: {
+        type: String,
+        required: [true, 'The message cannot be empty.'],
+		max: 4000000
+    },
+    userId: {
+        type: String,
+        required: [true, 'The message requires a User ID.'],
+        unique: true,
+    },
+    conversationId: {
+        type: String,
+        required: [true, 'The message requires a conversation ID.'],
+		unique: true
+    },
+	createdAt: {
+        type: Date,
+        required: [true, 'The message requires a creation date.'],
+		default: Date.now
     }
-}
+});
+
+const Message = db.model('Message', messageSchema);
+
+export default class Message;

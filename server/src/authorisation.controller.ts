@@ -2,16 +2,8 @@
 import * as express from 'express';
 import { MongoHelper } from './mongo.helper';
 import User from './models/user.model';
-import * as bcrypt from 'bcryptjs';
-const nodemailer = require("nodemailer");
-var generator = require('generate-password');
-try{
-	require('dotenv').config({path:__dirname+'/./../../.env'})
-}
-catch(e){
-	console.error("make an .env file in the root directory!");
-}
-
+import * as nodemailer from "nodemailer";
+import * as generator from 'generate-password'
 
 const authorisationRouter = express.Router();
 
@@ -39,39 +31,39 @@ authorisationRouter.post('/asdf', function (req: express.Request, res: express.R
 
 authorisationRouter.post('/login', async function (req: express.Request, res: express.Response, next: express.NextFunction) {
 	try {
-		
+
 		const email = req.body.email;
 		const password = req.body.password;
 		const user = await User.findByCredentials(email, password);
-		if ((Date.now()-user.expTimeStamp)/1000>100){
-			return res.status(401).send({error: 'New password expired!'});
+		if ((Date.now() - user.expTimeStamp) / 1000 > 100) {
+			return res.status(401).send({ error: 'New password expired!' });
 		}
 		if (!user) {
 			return res.status(401).json({ error: 'Wrong credentials provided' });
-		}		
+		}
 
 		const token = await user.generateToken();
 		res.json(token);
 	} catch (e) {
-		console.log("error!"+e);
+		console.log("error!" + e);
 		res.status(400).json(e);
-		
+
 	}
 });
 
 authorisationRouter.post('/passwordReset', async function (req: express.Request, res: express.Response, next: express.NextFunction) {
 
 	const email = req.body.email;
-	
+
 
 	// create reusable transporter object using the default SMTP transport
 
 	var transporter = nodemailer.createTransport({
-	  service: 'gmail',
-	  auth: {
-	    user: 'teiterteitle@gmail.com',
-	    pass: 'turtleman'
-	  }
+		service: 'gmail',
+		auth: {
+			user: 'teiterteitle@gmail.com',
+			pass: 'turtleman'
+		}
 	});
 
 
@@ -79,16 +71,16 @@ authorisationRouter.post('/passwordReset', async function (req: express.Request,
 		length: 10,
 		numbers: true
 	});
-	
+
 	const user = await User.replacePasswordHash(email, password);
-	
-	  // send mail with defined transport object
+
+	// send mail with defined transport object
 	let info = await transporter.sendMail({
 		from: 'allenTheSpam@gmail.com', // sender address
 		to: "teiterteitle@gmail.com", // list of receivers
 		subject: "password reset", // Subject line
 		text: "Random password generated: ", // plain text body
-		html: "<b>"+password+"</b>" // html body
+		html: "<b>" + password + "</b>" // html body
 	});
 
 	// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...

@@ -4,7 +4,7 @@ const messageSchema = new mongoose.Schema({
     messageText: {
         type: String,
         required: [true, 'The message cannot be empty.'],
-		max: 4000000
+        max: 4000000
     },
     userId: {
         type: String,
@@ -14,15 +14,15 @@ const messageSchema = new mongoose.Schema({
     conversationId: {
         type: String,
         required: [true, 'The message requires a conversation ID.'],
-		unique: true
+        unique: true
     },
-	createdAt: {
+    createdAt: {
         type: Date,
         required: [true, 'The message requires a creation date.'],
-		default: Date.now
+        default: Date.now
     }
 });
 
-const Message = db.model('Message', messageSchema);
+const Message = mongoose.model('Message', messageSchema);
 
-export default class Message;
+export default Message;

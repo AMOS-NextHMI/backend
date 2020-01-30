@@ -71,11 +71,11 @@ conversationRouter.post('/conversations', auth, (req: express.Request, res: expr
 conversationRouter.post('/conversations/:conversationId/messages', auth, (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const conversationId = req.params.conversationId;
     const messageText = req.body.messageText;
-    const message = new Message(
-        messageText,
-        req.user?.id,
-        conversationId
-    );
+    const message = new Message({
+        messageText: messageText,
+        userId: req.user?.id,
+        conversationId: conversationId
+    });
     ConversationModel.findById(conversationId, (err, conversation: Conversation) => {
         if (err || !conversation) {
             res.status(404).end();

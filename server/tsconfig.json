@@ -1,13 +1,14 @@
 {
     "compilerOptions": {
-        "target": "esnext",
+        "target": "es2019",
         "module": "commonjs",
         "outDir": "./dist/server",
         "strict": true,
         "allowJs": true,
         "sourceMap": true,
         "typeRoots": [
-            "node_modules/@types"
+            "./types",
+            "./node_modules/@types",
         ]
     },
     "exclude": [
@@ -16,6 +17,6 @@
         ".vscode"
     ],
     "include": [
-        "src/**/*.ts"
+        "src/**/*.ts",
     ],
 }

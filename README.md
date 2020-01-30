@@ -18,12 +18,9 @@ Or
    cd server
    ```
 
-1. Build the container, and install npm dependencies:
+1. Build the container:
    ```bash
     docker-compose build
-    cd src
-    npm i
-    cd ..
    ```
 2. Run the image:
    ```bash
@@ -34,7 +31,7 @@ The server can be stopped with the command:
    docker-compose down
 ```
 
-**If new npm dependencies are installed you have to rerun "npm i"**
+**If you want the node_modules on your host for IDE support install npm and run "npm i" in the server directory**
 
 # endpoints
 websocket  : ws://localhost:8080/ws

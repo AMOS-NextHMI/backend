@@ -9,8 +9,6 @@ import Conversation from './models/conversation.interface';
 const conversationRouter = express.Router();
 
 conversationRouter.get('/users/:userId/conversations', auth, function (req: express.Request, res: express.Response, next: express.NextFunction) {
-
-
     // TODO implement db access
     res.json(
         {
@@ -32,10 +30,8 @@ conversationRouter.get('/conversations/:conversationId', auth, function (req: ex
         members: userId
     }).then((conv) => {
         res.status(200).json(conv);
-
     }).catch((error) => {
-        res.status(500).json({ "error": error });
-
+        res.status(422).json({ "error": error });
     });
 });
 
@@ -51,18 +47,12 @@ conversationRouter.post('/conversations', auth, (req: express.Request, res: expr
         }
     );
     conversation.members.push(req.user?.id);
-    conversation.save(err => {
-        if (err) {
-            res.status(500).json({
-                "error": err
-            });
+    conversation.save(error => {
+        if (error) {
+            res.status(422).json({ "error": error });
             return;
         }
-        res.status(201).json(
-            {
-                "conversationId": conversation.id
-            }
-        );
+        res.status(201).json({ "conversationId": conversation.id });
         res.send()
     });
 });
@@ -76,9 +66,9 @@ conversationRouter.post('/conversations/:conversationId/messages', auth, (req: e
         userId: req.user?.id,
         conversationId: conversationId
     });
-    ConversationModel.findById(conversationId, (err, conversation: Conversation) => {
-        if (err || !conversation) {
-            res.status(404).end();
+    ConversationModel.findById(conversationId, (error, conversation: Conversation) => {
+        if (error || !conversation) {
+            res.status(422).end();
         }
         conversation.messages.push(message);
         conversation.save();

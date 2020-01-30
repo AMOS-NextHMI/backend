@@ -124,7 +124,7 @@ Error:
 
 ```json
 {
-  "username": "STRING",
+  "email": "STRING",
   "password": "STRING"
 }
 ```

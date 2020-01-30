@@ -2,17 +2,18 @@ version: "2"
 services:
   app:
     container_name: app
+    image: node:alpine
+    working_dir: /app
     restart: always
-    build: .
     ports:
       - "80:80"
-      - "8081:8081"
     links:
       - mongo
     volumes: 
       - .:/app
       - /app/node_modules
-    command: npm run start:watch
+    command: >
+      sh -c "npm i && npm run start:watch"
   mongo:
     container_name: mongo
     image: mvertes/alpine-mongo

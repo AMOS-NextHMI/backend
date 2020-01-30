@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
+import Message, { MessageModelInterface } from './message.interface';
 
-const messageSchema = new mongoose.Schema({
+export const messageSchema = new mongoose.Schema({
     messageText: {
         type: String,
         required: [true, 'The message cannot be empty.'],
@@ -9,7 +10,7 @@ const messageSchema = new mongoose.Schema({
     userId: {
         type: String,
         required: [true, 'The message requires a User ID.'],
-        unique: true,
+        unique: true
     },
     conversationId: {
         type: String,
@@ -18,11 +19,11 @@ const messageSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        required: [true, 'The message requires a creation date.'],
+        required: false,
         default: Date.now
     }
 });
 
-const Message = mongoose.model('Message', messageSchema);
+const MessageModel: MessageModelInterface = mongoose.model<Message & MessageModelInterface>('Message', messageSchema);
 
-export default Message;
+export default MessageModel;

@@ -4,7 +4,7 @@ import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { JWT_KEY } from '../env';
 
-const userSchema = new mongoose.Schema({
+export const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -41,19 +41,11 @@ userSchema.pre<User>('save', async function (next) {
 });
 
 userSchema.statics.replacePasswordHash = async function (email: string, password: string) {
-    
-
     const user = await this.findOne({ email: email });
-
     user.password = password;
     user.expTimeStamp=Date.now();
-    await user.save()
-    const userAgain = await this.findOne({ email: email });
-
-   
+    await user.save();
     return user;
-
-
 };
 
 userSchema.statics.findByCredentials = async function (email: string, password: string) {

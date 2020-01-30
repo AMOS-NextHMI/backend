@@ -21,4 +21,3 @@ const conversationSchema = new mongoose.Schema({
 const ConversationModel: ConversationModelInterface = mongoose.model<Conversation & ConversationModelInterface>('Conversation', conversationSchema);
 
 export default ConversationModel;
-

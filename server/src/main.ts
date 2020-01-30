@@ -5,7 +5,7 @@ import * as mongoose from 'mongoose';
 
 
 const PORT = 80;
-const MONGO_DB_URL: string = 'mongodb://mongo:27017/server';
+const MONGO_DB_URL: string = 'mongodb://localhost:27017/server';
 
 //initialize a simple http server
 let server = http.createServer(app);
@@ -18,8 +18,11 @@ server.listen(process.env.PORT || PORT, async () => {
 
     console.log(`Example app listening on port ${PORT}.`);
     try {
+    	console.log("borf");
         await MongoHelper.connect(MONGO_DB_URL);
+        console.log("diddly");
     } catch (error) {
+    	console.log("fuck!");
         console.error(error);
     }
 });

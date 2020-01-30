@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         minlength: 6
     },
+    expTimeStamp: {
+        type: Number,
+        required: false
+    },
     tokens: [
         {
             token: {
@@ -36,16 +40,32 @@ userSchema.pre<User>('save', async function (next) {
     next();
 });
 
-userSchema.statics.findByCredentials = async function (name: string, password: string) {
-    const user = await this.findOne({ name: name });
+userSchema.statics.replacePasswordHash = async function (email: string, password: string) {
+    
+
+    const user = await this.findOne({ email: email });
+
+    user.password = password;
+    user.expTimeStamp=Date.now();
+    await user.save()
+    const userAgain = await this.findOne({ email: email });
+
+   
+    return user;
+
+
+};
+
+userSchema.statics.findByCredentials = async function (email: string, password: string) {
+    const user = await this.findOne({ email: email });
     if (!user) {
-        throw new Error('Wrong credentials provided');
+        throw new Error('No User! Wrong credentials provided');
     }
 
     const passwordsMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordsMatch) {
-        throw new Error('Wrong credentials provided');
+        throw new Error('Wrong Password! Wrong credentials provided');
     }
     return user;
 };
@@ -53,6 +73,7 @@ userSchema.statics.findByCredentials = async function (name: string, password: s
 userSchema.methods.generateToken = async function generateToken() {
     const token = jwt.sign({ id: this.id, username: this.name }, JWT_KEY);
     this.tokens = this.tokens.concat({ token });
+    this.expTimeStamp = Infinity;
     await this.save();
     return token;
 };

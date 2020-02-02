@@ -8,27 +8,27 @@ Authorization: Bearer YOUR_TOKEN_HERE
 
 ## Server -> Phone (GET Requests)
 
-### ConversationsOverview
-
-#### Request
+### NewConversation
 ```
 RequestTyp: GET
-RequestURL: http://130.149.172.169/users/userId=STRING/conversations
-Response: 200 - OK -> JSON
+RequestURL: http://130.149.172.169/conversations
+Response: 200 - JSON
 Error:
 - 400 - Bad Request
 - 401 - Unauthorized
-- 404 - Not Found
+- 406 - Not Acceptable
 - 500 - ServerError
 ```
 
-#### JSON Payload
+#### JSON Payload Response
+
 ```json
-{ "conversations": [
-    {"conversationId": "STRING", "lastmessage": {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"}},
-    {"conversationId": "STRING", "lastmessage": {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"}},
-    {"conversationId": "STRING", "lastmessage": {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"}}
-  ]
+  {
+"members": [ "STRING" ],
+"_id": "5e3734cef2be6e003c6eb9b4",
+"name": "STRING",
+"messages": [],
+"__v": 0
 }
 ```
 

@@ -69,7 +69,7 @@ Error:
 #### Request
 ```
 RequestTyp: POST
-RequestURL: http://130.149.172.169/conversation
+RequestURL: http://130.149.172.169/conversations
 Response: 201 - Created & conversationID
 Error:
 - 400 - Bad Request
@@ -80,9 +80,17 @@ Error:
 
 #### JSON Payload
 ```json
-{ "members": [
-    {"member": "userId"}
-  ]
+{
+  "name": "STRING",
+  "members": [{"email": "STRING"}, {"email": "STRING"}]
+}
+```
+
+#### JSON Payload Response
+
+```json
+{
+  "conversationId": "ID"
 }
 ```
 

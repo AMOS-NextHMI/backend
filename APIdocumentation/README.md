@@ -147,6 +147,7 @@ Error:
 ```json
 {
   "email": "STRING",
+  "name": "STRING",
   "password": "STRING"
 }
 ```
@@ -169,7 +170,7 @@ The Server will return a JWT with the following payload:
 ```
 RequestTyp: POST
 RequestURL: http://130.149.172.169/register
-Response: 201 - Created
+Response: 201 - Token -> JSON
 Error:
 - 401 - { "error": STRING }
 - 422 - Unprocessable Entity
@@ -179,7 +180,7 @@ Error:
 
 ```json
 {
-  "username": "STRING",
+  "name": "STRING",
   "email": "STRING",
   "password": "STRING"
 }

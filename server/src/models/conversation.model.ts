@@ -9,7 +9,7 @@ const conversationSchema = new mongoose.Schema({
         required: [true, 'The conversation needs a name.']
     },
     members: {
-        type: [userSchema],
+        type: [String],
         required: [true, 'The conversation needs to contain members.']
     }, // list of user ids 
     messages: {

@@ -8,17 +8,16 @@ import Conversation from './models/conversation.interface';
 
 const conversationRouter = express.Router();
 
-conversationRouter.get('/users/:userId/conversations', auth, function (req: express.Request, res: express.Response, next: express.NextFunction) {
-    // TODO implement db access
-    res.json(
-        {
-            "conversations": [
-                { "conversationId": "dummy-1", "lastmessage": { "senderUserName": "Dummy Alice", "timestamp": "2020-01-15T22:05:24Z", "messageText": "Oh echt, ich hab noch garnichts" } },
-                { "conversationId": "dummy-2", "lastmessage": { "senderUserName": "Dummy Carol", "timestamp": "2020-01-17T04:17:17Z", "messageText": "Hey, do you wan't to go out with me?" } },
-                { "conversationId": "dummy-3", "lastmessage": { "senderUserName": "Dummy Eve", "timestamp": "2020-01-15T21:26:17Z", "messageText": "Hasta la vista" } }
-            ]
+conversationRouter.get('/conversations', auth, function (req: express.Request, res: express.Response, next: express.NextFunction) {
+    ConversationModel.find({ members: req.user?.id }, (error, conversations) => {
+        if (error) {
+            console.log(error);
         }
-    );
+        console.log(conversations);
+        res.json(conversations);
+    });
+    // TODO implement db access
+
 });
 
 
@@ -41,6 +40,7 @@ conversationRouter.post('/conversations', auth, (req: express.Request, res: expr
     console.log(req.body);
     const conversation = new ConversationModel(req.body);
     conversation.members.push(req.user?.id);
+    console.log(conversation);
     conversation.save(error => {
         if (error) {
             res.status(422).json({ "error": error });

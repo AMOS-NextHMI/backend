@@ -147,7 +147,6 @@ Error:
 ```json
 {
   "email": "STRING",
-  "name": "STRING",
   "password": "STRING"
 }
 ```
@@ -159,7 +158,7 @@ The Server will return a JWT with the following payload:
 ```json
 {
   "id": "STRING",
-  "username": "STRING"
+  "email": "STRING"
 }
 ```
 

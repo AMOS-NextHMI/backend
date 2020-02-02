@@ -108,6 +108,28 @@ Error:
 }
 ```
 
+### passwordReset
+
+#### Request
+```
+RequestTyp: POST
+RequestURL: http://130.149.172.169/passwordReset
+Response: 201 - Created 
+Error:
+- 400 - Bad Request
+- 401 - Unauthorized
+- 406 - Not Acceptable
+- 500 - ServerError
+```
+
+#### JSON Payload
+
+```
+{
+  "email": "STRING"
+}
+```
+
 ### Login
 
 #### Request

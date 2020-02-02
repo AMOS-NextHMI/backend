@@ -38,12 +38,7 @@ conversationRouter.get('/conversations/:conversationId', auth, function (req: ex
 
 // ### POST NewConversation --> conversation_id on 201
 conversationRouter.post('/conversations', auth, (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    const conversation = new ConversationModel(
-        {
-            name: req.body.name,
-            members: req.body.members
-        }
-    );
+    const conversation = new ConversationModel(req.body);
     conversation.members.push(req.user?.id);
     conversation.save(error => {
         if (error) {

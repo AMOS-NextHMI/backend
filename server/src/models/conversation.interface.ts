@@ -1,10 +1,9 @@
 import * as mongoose from 'mongoose';
 import Message from './message.interface';
-import User from './user.interface';
 
 export default interface Conversation extends mongoose.Document {
     name: string;
-    members: [User]; // list of user ids
+    member: [string]; // list of user ids
     messages: [Message]; // list of messages
 }
 

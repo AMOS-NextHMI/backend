@@ -38,12 +38,10 @@ conversationRouter.get('/conversations/:conversationId', auth, function (req: ex
 
 // ### POST NewConversation --> conversation_id on 201
 conversationRouter.post('/conversations', auth, (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    const { name, members } = req.body;
     const conversation = new ConversationModel(
         {
-            name: name,
-            member: members,
-            messages: []
+            name: req.body.name,
+            members: req.body.members
         }
     );
     conversation.members.push(req.user?.id);

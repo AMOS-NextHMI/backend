@@ -159,7 +159,6 @@ The Server will return a JWT with the following payload:
 ```json
 {
   "id": "STRING",
-  "exp": "Date",
   "username": "STRING"
 }
 ```

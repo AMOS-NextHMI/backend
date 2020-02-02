@@ -25,6 +25,7 @@ authorisationRouter.post('/reset', function (req: express.Request, res: express.
 });
 
 authorisationRouter.post('/login', async function (req: express.Request, res: express.Response, next: express.NextFunction) {
+	console.log(req);
 	try {
 		const email = req.body.email;
 		const password = req.body.password;

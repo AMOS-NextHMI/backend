@@ -6,6 +6,7 @@ export default interface Conversation extends mongoose.Document {
     name: string;
     members: Array<String>; // list of user ids 
     messages: Array<Message>; // list of messages 
+
 }
 
 export interface ConversationModelInterface extends mongoose.Model<Conversation> {

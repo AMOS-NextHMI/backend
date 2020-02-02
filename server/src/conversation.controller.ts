@@ -9,7 +9,7 @@ import Conversation from './models/conversation.interface';
 const conversationRouter = express.Router();
 
 conversationRouter.get('/conversations', auth, function (req: express.Request, res: express.Response, next: express.NextFunction) {
-    ConversationModel.find({ members: req.user?.id }, (error, conversations) => {
+    ConversationModel.find({ members: req.user?.email }, (error, conversations) => {
         if (error) {
             console.log(error);
         }
@@ -37,16 +37,18 @@ conversationRouter.get('/conversations/:conversationId', auth, function (req: ex
 
 // ### POST NewConversation --> conversation_id on 201
 conversationRouter.post('/conversations', auth, (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    console.log(req.body);
     const conversation = new ConversationModel(req.body);
-    conversation.members.push(req.user?.id);
-    console.log(conversation);
-    conversation.save(error => {
+
+
+    conversation.members.push((req.user?.email || ""));
+
+    conversation.save((error, convo) => {
         if (error) {
             res.status(422).json({ "error": error });
             return;
         }
-        res.status(201).json({ "conversationId": conversation.id });
+
+        res.status(201).json({ "conversationId": convo.id });
         res.send()
     });
 });

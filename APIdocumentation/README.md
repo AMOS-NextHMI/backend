@@ -23,12 +23,12 @@ Error:
 #### JSON Payload Response
 
 ```json
-  {
-"members": [ "STRING" ],
-"_id": "5e3734cef2be6e003c6eb9b4",
-"name": "STRING",
-"messages": [],
-"__v": 0
+ {
+  "members": [ "STRING" ],
+  "_id": "5e3734cef2be6e003c6eb9b4",
+  "name": "STRING",
+  "messages": [],
+  "__v": 0
 }
 ```
 
@@ -47,7 +47,7 @@ Error:
 - 500 - ServerError
 ```
 
-#### JSON Payload
+#### JSON Payload Response
 ```json
 { "conversationId": "STRING",
   "name": "STRING",
@@ -56,8 +56,7 @@ Error:
       {"userId": "STRING", "name": "STRING", "pictureURL": "String"}
   ],
   "messages": [
-      {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"},
-      {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"},
+      {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"}
   ]
 }
 ```
@@ -82,7 +81,7 @@ Error:
 ```json
 {
   "name": "STRING",
-  "members": [{"email": "STRING"}, {"email": "STRING"}]
+  "members": ["STRING", "STRING"]
 }
 ```
 

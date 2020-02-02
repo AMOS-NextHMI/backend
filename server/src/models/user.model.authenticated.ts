@@ -4,10 +4,10 @@ import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { JWT_KEY } from '../env';
 
-export const userSchema = new mongoose.Schema({
+export const userSchemaAuthenticated = new mongoose.Schema({
     name: {
         type: String,
-        required: false,
+        required: true,
     },
     email: {
         type: String,
@@ -16,7 +16,7 @@ export const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: false,
+        required: true,
         minlength: 6
     },
     expTimeStamp: {
@@ -33,14 +33,14 @@ export const userSchema = new mongoose.Schema({
     ]
 });
 
-userSchema.pre<User>('save', async function (next) {
+userSchemaAuthenticated.pre<User>('save', async function (next) {
     if (this.isModified('password')) {
         this.password = await bcrypt.hash(this.password, 10);
     }
     next();
 });
 
-userSchema.statics.replacePasswordHash = async function (email: string, password: string) {
+userSchemaAuthenticated.statics.replacePasswordHash = async function (email: string, password: string) {
     const user = await this.findOne({ email: email });
     user.password = password;
     user.expTimeStamp=Date.now();
@@ -48,7 +48,7 @@ userSchema.statics.replacePasswordHash = async function (email: string, password
     return user;
 };
 
-userSchema.statics.findByCredentials = async function (email: string, password: string) {
+userSchemaAuthenticated.statics.findByCredentials = async function (email: string, password: string) {
     const user = await this.findOne({ email: email });
     if (!user) {
         throw new Error('No User! Wrong credentials provided');
@@ -62,7 +62,7 @@ userSchema.statics.findByCredentials = async function (email: string, password: 
     return user;
 };
 
-userSchema.methods.generateToken = async function generateToken() {
+userSchemaAuthenticated.methods.generateToken = async function generateToken() {
     const token = jwt.sign({ id: this.id, username: this.name }, JWT_KEY);
     this.tokens = this.tokens.concat({ token });
     this.expTimeStamp = Infinity;
@@ -70,6 +70,6 @@ userSchema.methods.generateToken = async function generateToken() {
     return token;
 };
 
-const UserModel: UserModelInterface = mongoose.model<User, UserModelInterface>('User', userSchema);
+const UserModelAuthenticated: UserModelInterface = mongoose.model<User, UserModelInterface>('User', userSchemaAuthenticated);
 
-export default UserModel;
+export default UserModelAuthenticated;

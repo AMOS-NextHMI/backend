@@ -17,7 +17,8 @@ if (dotenv_result.error) {
 
 
 const PORT = 80;
-const MONGO_DB_URL: string = process.env.MONGO_DB_URL ?? 'mongodb://mongo:27017/server';
+// const MONGO_DB_URL: string = process.env.MONGO_DB_URL ?? 'mongodb://localhost:27017/server';
+const MONGO_DB_URL: string = 'mongodb://localhost:27017/server';
 
 //initialize a simple http server
 let server = http.createServer(app);

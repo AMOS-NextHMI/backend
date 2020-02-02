@@ -27,7 +27,36 @@ export const userSchema = new mongoose.Schema({
         {
             token: {
                 type: String,
-                required: true
+                required: false
+            }
+        }
+    ]
+});
+
+export const userSchemaAuthenticated = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 6
+    },
+    expTimeStamp: {
+        type: Number,
+        required: false
+    },
+    tokens: [
+        {
+            token: {
+                type: String,
+                required: false
             }
         }
     ]
@@ -71,5 +100,7 @@ userSchema.methods.generateToken = async function generateToken() {
 };
 
 const UserModel: UserModelInterface = mongoose.model<User, UserModelInterface>('User', userSchema);
+const UserModelAuthenticated: UserModelInterface = mongoose.model<User, UserModelInterface>('User', userSchemaAuthenticated);
 
 export default UserModel;
+export UserModelAuthenticated;

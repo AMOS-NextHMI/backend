@@ -4,8 +4,8 @@ import User from './user.interface';
 
 export default interface Conversation extends mongoose.Document {
     name: string;
-    members: Array<User>; // list of user ids 
-    messages: Array<Message>; // list of messages 
+    members: [User]; // list of user ids
+    messages: [Message]; // list of messages
 }
 
 export interface ConversationModelInterface extends mongoose.Model<Conversation> {

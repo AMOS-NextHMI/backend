@@ -23,10 +23,10 @@ conversationRouter.get('/conversations', auth, function (req: express.Request, r
 
 // ### GET conversation by id --> conversation object on success
 conversationRouter.get('/conversations/:conversationId', auth, function (req: express.Request, res: express.Response, next: express.NextFunction) {
-    const userId = req.user?.id;
+    const userEmail = req.user?.email;
     ConversationModel.findOne({
         _id: new ObjectId(req.params.conversationId),
-        members: userId
+        members: userEmail
     }).then((conv) => {
         res.status(200).json(conv);
     }).catch((error) => {

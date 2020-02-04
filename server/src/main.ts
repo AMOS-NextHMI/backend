@@ -4,7 +4,6 @@ let dotenv_result = config({ path: resolve(".env") });
 
 if (dotenv_result.error) {
     dotenv_result = config({ path: resolve(".env_example") });
-    console.log(process.env.JWT_KEY_PRIV);
 
     if (dotenv_result.error) {
         throw "Please create an .env file in the server directory or download the .env_example file ";

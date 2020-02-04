@@ -34,8 +34,6 @@ The server can be stopped with the command:
 **If you want the node_modules on your host for IDE support install npm and run "npm i" in the server directory**
 
 # endpoints
-websocket  : ws://localhost:8080/ws
-
 REST API see
 [APIDokumentation](./APIdocumentation/README.md)
 

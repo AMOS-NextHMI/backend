@@ -1,12 +1,13 @@
 import * as mongoose from 'mongoose';
+import User from './user.interface';
 
 export default interface Message extends mongoose.Document {
-	messageText: string,
+    messageText: string,
     userId: string,
     conversationId: string,
-	createdAt: Date
+    createdAt: Date
 }
 
-export interface MessageModelInterface extends mongoose.Model<User> {
+export interface MessageModelInterface extends mongoose.Model<Message> {
 
 }

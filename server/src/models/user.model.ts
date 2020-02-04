@@ -7,7 +7,7 @@ import { JWT_KEY } from '../env';
 export const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: false,
     },
     email: {
         type: String,
@@ -16,7 +16,7 @@ export const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
+        required: false,
         minlength: 6
     },
     expTimeStamp: {
@@ -27,7 +27,7 @@ export const userSchema = new mongoose.Schema({
         {
             token: {
                 type: String,
-                required: true
+                required: false
             }
         }
     ]

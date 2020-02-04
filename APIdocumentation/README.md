@@ -8,27 +8,27 @@ Authorization: Bearer YOUR_TOKEN_HERE
 
 ## Server -> Phone (GET Requests)
 
-### ConversationsOverview
-
-#### Request
+### NewConversation
 ```
 RequestTyp: GET
-RequestURL: http://130.149.172.169/users/userId=STRING/conversations
-Response: 200 - OK -> JSON
+RequestURL: http://130.149.172.169/conversations
+Response: 200 - JSON
 Error:
 - 400 - Bad Request
 - 401 - Unauthorized
-- 404 - Not Found
+- 406 - Not Acceptable
 - 500 - ServerError
 ```
 
-#### JSON Payload
+#### JSON Payload Response
+
 ```json
-{ "conversations": [
-    {"conversationId": "STRING", "lastmessage": {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"}},
-    {"conversationId": "STRING", "lastmessage": {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"}},
-    {"conversationId": "STRING", "lastmessage": {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"}}
-  ]
+ {
+  "members": [ "STRING" ],
+  "_id": "5e3734cef2be6e003c6eb9b4",
+  "name": "STRING",
+  "messages": [],
+  "__v": 0
 }
 ```
 
@@ -47,7 +47,7 @@ Error:
 - 500 - ServerError
 ```
 
-#### JSON Payload
+#### JSON Payload Response
 ```json
 { "conversationId": "STRING",
   "name": "STRING",
@@ -56,8 +56,7 @@ Error:
       {"userId": "STRING", "name": "STRING", "pictureURL": "String"}
   ],
   "messages": [
-      {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"},
-      {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"},
+      {"senderUserID": "STRING", "timestamp": "STRING", "messageText": "STRING"}
   ]
 }
 ```
@@ -69,7 +68,7 @@ Error:
 #### Request
 ```
 RequestTyp: POST
-RequestURL: http://130.149.172.169/conversation
+RequestURL: http://130.149.172.169/conversations
 Response: 201 - Created & conversationID
 Error:
 - 400 - Bad Request
@@ -80,9 +79,17 @@ Error:
 
 #### JSON Payload
 ```json
-{ "members": [
-    {"member": "userId"}
-  ]
+{
+  "name": "STRING",
+  "members": ["STRING", "STRING"]
+}
+```
+
+#### JSON Payload Response
+
+```json
+{
+  "conversationId": "ID"
 }
 ```
 
@@ -108,6 +115,28 @@ Error:
 }
 ```
 
+### passwordReset
+
+#### Request
+```
+RequestTyp: POST
+RequestURL: http://130.149.172.169/passwordReset
+Response: 201 - Created 
+Error:
+- 400 - Bad Request
+- 401 - Unauthorized
+- 406 - Not Acceptable
+- 500 - ServerError
+```
+
+#### JSON Payload
+
+```
+{
+  "email": "STRING"
+}
+```
+
 ### Login
 
 #### Request
@@ -124,7 +153,7 @@ Error:
 
 ```json
 {
-  "username": "STRING",
+  "email": "STRING",
   "password": "STRING"
 }
 ```
@@ -136,8 +165,7 @@ The Server will return a JWT with the following payload:
 ```json
 {
   "id": "STRING",
-  "exp": "Date",
-  "username": "STRING"
+  "email": "STRING"
 }
 ```
 
@@ -147,7 +175,7 @@ The Server will return a JWT with the following payload:
 ```
 RequestTyp: POST
 RequestURL: http://130.149.172.169/register
-Response: 201 - Created
+Response: 201 - Token -> JSON
 Error:
 - 401 - { "error": STRING }
 - 422 - Unprocessable Entity
@@ -157,7 +185,7 @@ Error:
 
 ```json
 {
-  "username": "STRING",
+  "name": "STRING",
   "email": "STRING",
   "password": "STRING"
 }

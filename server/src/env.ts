@@ -1,1 +1,0 @@
-export const JWT_KEY = 'iuhouih8273zt78!B!O(27geduwzvfgzuv761672r';

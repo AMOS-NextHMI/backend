@@ -30,6 +30,7 @@ conversationRouter.get('/conversations/:conversationId', auth, function (req: ex
         res.status(422).json({
             "error": "Not a valid Id"
         }).end();
+        return;
     }
 
     ConversationModel.findOne({
@@ -70,6 +71,7 @@ conversationRouter.post('/conversations/:conversationId/messages', auth, (req: e
         res.status(422).json({
             "error": "Not a valid Id"
         }).end();
+        return;
     }
 
     const message = new Message({

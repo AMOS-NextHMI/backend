@@ -1,18 +1,22 @@
 # websocket-node-express
 A simple implementation of a Websocket server based on node/express written in typescript
 
-# Running the server in docker
+## Setup
+
+Copy the **env_example** to a new file **.env** and change the variable to your needs.
+
+**Attention**
+
+You have to change the JWT keys, leaving them like they are is highly insecure and could result in hacks if left in production.
+
+## Running the webserver and MongoDB in docker
 
 0. Change into the server directory
    ```bash
    cd server
    ```
 
-1. Build the container:
-   ```bash
-    docker-compose build
-   ```
-2. Run the image:
+1. Run the image:
    ```bash
    docker-compose up
    ```

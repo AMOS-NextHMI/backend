@@ -2,7 +2,8 @@ import * as mongoose from 'mongoose';
 import User, { UserModelInterface } from './user.interface';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
-import { JWT_KEY } from '../env';
+
+const JWT_KEY_PRIV = process.env.JWT_KEY_PRIV ?? '456';
 
 export const userSchema = new mongoose.Schema({
     name: {
@@ -43,7 +44,7 @@ userSchema.pre<User>('save', async function (next) {
 userSchema.statics.replacePasswordHash = async function (email: string, password: string) {
     const user = await this.findOne({ email: email });
     user.password = password;
-    user.expTimeStamp=Date.now();
+    user.expTimeStamp = Date.now();
     await user.save();
     return user;
 };
@@ -63,7 +64,7 @@ userSchema.statics.findByCredentials = async function (email: string, password: 
 };
 
 userSchema.methods.generateToken = async function generateToken() {
-    const token = jwt.sign({ id: this.id, username: this.name }, JWT_KEY);
+    const token = jwt.sign({ id: this.id, username: this.name }, JWT_KEY_PRIV);
     this.tokens = this.tokens.concat({ token });
     this.expTimeStamp = Infinity;
     await this.save();

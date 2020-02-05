@@ -1,10 +1,5 @@
-import { app } from './app';
-import * as http from 'http';
-import { MongoHelper } from "./mongo.helper";
-import * as mongoose from 'mongoose';
-import { resolve } from 'path';
 import { config } from 'dotenv';
-
+import { resolve } from 'path';
 let dotenv_result = config({ path: resolve(".env") });
 
 if (dotenv_result.error) {
@@ -15,6 +10,10 @@ if (dotenv_result.error) {
     }
 }
 
+import { app } from './app';
+import * as http from 'http';
+import { MongoHelper } from "./mongo.helper";
+import * as mongoose from 'mongoose';
 
 const PORT = 80;
 const MONGO_DB_URL: string = process.env.MONGO_DB_URL ?? 'mongodb://mongo:27017/server';

@@ -19,5 +19,7 @@ services:
     image: mvertes/alpine-mongo
     ports:
       - "27017:27017"
+    volumes:
+      - ./mongo-volume:/data/db
     expose: 
       - 27017

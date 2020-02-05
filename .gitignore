@@ -6,4 +6,4 @@ client
 server/node_modules
 
 # ignore mongo-db volume
-server/mongo-volumn
+server/mongo-volume

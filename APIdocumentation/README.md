@@ -8,7 +8,7 @@ Authorization: Bearer YOUR_TOKEN_HERE
 
 ## Server -> Phone (GET Requests)
 
-### NewConversation
+### Conversation Overview
 ```
 RequestTyp: GET
 RequestURL: http://130.149.172.169/conversations
@@ -23,13 +23,15 @@ Error:
 #### JSON Payload Response
 
 ```json
- {
-  "members": [ "STRING" ],
-  "_id": "5e3734cef2be6e003c6eb9b4",
-  "name": "STRING",
-  "messages": [],
-  "__v": 0
-}
+ [
+  {
+   "members": [ "STRING" ],
+   "_id": "5e3734cef2be6e003c6eb9b4",
+   "name": "STRING",
+   "messages": [],
+   "__v": 0
+   }, {...}
+  ]
 ```
 
 ### Conversation

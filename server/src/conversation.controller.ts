@@ -63,7 +63,7 @@ conversationRouter.post('/conversations', auth, (req: express.Request, res: expr
 });
 
 
-conversationRouter.post('/conversations/:conversationId/messages', auth, (req: express.Request, res: express.Response, next: express.NextFunction) => {
+conversationRouter.post('/conversations/:conversationId/messages', auth, async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const conversationId = req.params.conversationId;
     const messageText = req.body.messageText;
 
@@ -72,6 +72,12 @@ conversationRouter.post('/conversations/:conversationId/messages', auth, (req: e
             "error": "Not a valid Id"
         }).end();
         return;
+    }
+
+    const conversationExists = await ConversationModel.exists({ _id: new ObjectId(conversationId) });
+
+    if (!conversationExists) {
+        return res.status(404).end();
     }
 
     const message = new Message({

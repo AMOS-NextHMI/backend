@@ -4,3 +4,6 @@ package-lock.json
 client 
 .env
 server/node_modules
+
+# ignore mongo-db volume
+server/mongo-volumn

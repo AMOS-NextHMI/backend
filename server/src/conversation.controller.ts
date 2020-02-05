@@ -5,6 +5,7 @@ import ConversationModel from './models/conversation.model';
 import Message from './models/message.model';
 import { auth } from './middleware/auth';
 import Conversation from './models/conversation.interface';
+import * as mongoose from 'mongoose';
 
 const conversationRouter = express.Router();
 
@@ -24,6 +25,13 @@ conversationRouter.get('/conversations', auth, function (req: express.Request, r
 // ### GET conversation by id --> conversation object on success
 conversationRouter.get('/conversations/:conversationId', auth, function (req: express.Request, res: express.Response, next: express.NextFunction) {
     const userEmail = req.user?.email;
+
+    if (isNotValidId(req.params.conversationId)) {
+        res.status(422).json({
+            "error": "Not a valid Id"
+        }).end();
+    }
+
     ConversationModel.findOne({
         _id: new ObjectId(req.params.conversationId),
         members: userEmail
@@ -57,6 +65,13 @@ conversationRouter.post('/conversations', auth, (req: express.Request, res: expr
 conversationRouter.post('/conversations/:conversationId/messages', auth, (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const conversationId = req.params.conversationId;
     const messageText = req.body.messageText;
+
+    if (isNotValidId(conversationId)) {
+        res.status(422).json({
+            "error": "Not a valid Id"
+        }).end();
+    }
+
     const message = new Message({
         messageText: messageText,
         userId: req.user?.id,
@@ -71,5 +86,9 @@ conversationRouter.post('/conversations/:conversationId/messages', auth, (req: e
         res.status(201).end();
     });
 });
+
+function isNotValidId(mongooseId: any) {
+    return !mongoose.Types.ObjectId.isValid(mongooseId);
+}
 
 export { conversationRouter };

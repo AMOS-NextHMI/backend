@@ -64,7 +64,7 @@ userSchema.statics.findByCredentials = async function (email: string, password: 
 };
 
 userSchema.methods.generateToken = async function generateToken() {
-    const token = jwt.sign({ id: this.id, username: this.name }, JWT_KEY_PRIV);
+    const token = jwt.sign({ id: this.id, username: this.name }, JWT_KEY_PRIV, { algorithm: "RS256" });
     this.tokens = this.tokens.concat({ token });
     this.expTimeStamp = Infinity;
     await this.save();

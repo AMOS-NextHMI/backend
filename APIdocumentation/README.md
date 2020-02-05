@@ -38,7 +38,7 @@ Error:
 
 ```
 RequestTyp: GET
-RequestURL: http://130.149.172.169/conversations/conversationId=STRING
+RequestURL: http://130.149.172.169/conversations/<conversationId>
 Response: 200 - OK -> JSON
 Error:
 - 400 - Bad Request
@@ -98,7 +98,7 @@ Error:
 #### Request
 ```
 RequestTyp: POST
-RequestURL: http://130.149.172.169/conversations/conversationId=STRING/messages
+RequestURL: http://130.149.172.169/conversations/<conversationId>/messages
 Response: 201 - Created 
 Error:
 - 400 - Bad Request
